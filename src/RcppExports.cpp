@@ -10,19 +10,23 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _StatComp21060_rcpp_hello_world() {
+// bi_chain_cpp
+Rcpp::NumericMatrix bi_chain_cpp(int N, int n, int a, int b);
+RcppExport SEXP _StatComp21060_bi_chain_cpp(SEXP NSEXP, SEXP nSEXP, SEXP aSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    Rcpp::traits::input_parameter< int >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(bi_chain_cpp(N, n, a, b));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_StatComp21060_rcpp_hello_world", (DL_FUNC) &_StatComp21060_rcpp_hello_world, 0},
+    {"_StatComp21060_bi_chain_cpp", (DL_FUNC) &_StatComp21060_bi_chain_cpp, 4},
     {NULL, NULL, 0}
 };
 

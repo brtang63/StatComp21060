@@ -1,6 +1,15 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' @title bivariate MC chain
+//' @description  bivariate MC chain
+//' @param N sample size
+//' @param n initial value
+//' @param a sample size
+//' @param b sample size
+//' @return mat A matrix
+//' @export
+// [[Rcpp::export]]
 Rcpp::NumericMatrix bi_chain_cpp(int N, int n = 100, int a = 50, int b = 50) {
   Rcpp::NumericMatrix mat( N, 2);
   Rcpp::NumericVector xt (2);

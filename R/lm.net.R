@@ -1,20 +1,23 @@
-#' Title
+#' @title Fitting Linear Regression Models for Network-linked Data
 #'
-#' @param X 
-#' @param Y 
-#' @param Adj 
-#' @param lambda 
-#' @param gamma 
+#' @param X Design matrix of predictors.``
+#' @param Y Response vector.
+#' @param Adj Adjacency matrix.
+#' @param lambda Regularization parameter.
+#' @param gamma Tuning parameter controlling the degree of jittering.
 #'
 #' @return A \code{list} object comprising:
-#' \item{alpha} Vector of network cohesion.
-#' \item{beta} Regression coefficients.
+#' \item{alpha}{Vector of network cohesion.} 
+#' \item{beta}{Regression coefficients.} 
 #' @export
-#' 
+#'
 #'
 #' @examples
-#' 
-lm.net <- function(X, Y, Adj, lambda, gamma) {
+#' V <- 100
+#' K <- 3
+#' data <- generate.data(V, K)
+#' lm.net(data$X, data$Y, data$Adj)
+lm.net <- function(X, Y, Adj, lambda = 0.1, gamma = 0.01) {
   n <- nrow(X)
   p <- ncol(X)
   Y <- matrix(Y, ncol = 1)

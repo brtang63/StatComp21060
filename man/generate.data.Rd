@@ -2,26 +2,31 @@
 % Please edit documentation in R/generate.data.R
 \name{generate.data}
 \alias{generate.data}
-\title{Title}
+\title{Generate simulated dataset for regression with network-linked data}
 \usage{
 generate.data(V, K, inter.p = 0.8, between.p = 0.2)
 }
 \arguments{
-\item{between.p}{}
+\item{V}{number of vertices}
+
+\item{K}{number of communities}
+
+\item{inter.p}{in-community link probability}
+
+\item{between.p}{out-community link probability}
 }
 \value{
 A \code{list} object comprising:
-\item{X} Design matrix of predictors.
-\item{Y} Response vector.
-\item{Adj} Adjacency matrix.
+\item{X}{Design matrix of predictors.} 
+\item{Y}{Response vector.} 
+\item{Adj}{Adjacency matrix.}
 }
 \description{
-Title
+Generate simulated dataset for regression with network-linked data
 }
 \examples{
 V <- 100
 K <- 3
 dataset <- generate.data(V, K)
 str(dataset)
-
 }

@@ -2,29 +2,32 @@
 % Please edit documentation in R/lm.net.R
 \name{lm.net}
 \alias{lm.net}
-\title{Title}
+\title{Fitting Linear Regression Models for Network-linked Data}
 \usage{
-lm.net(X, Y, Adj, lambda, gamma)
+lm.net(X, Y, Adj, lambda = 0.1, gamma = 0.01)
 }
 \arguments{
-\item{X}{}
+\item{X}{Design matrix of predictors.``}
 
-\item{Y}{}
+\item{Y}{Response vector.}
 
-\item{Adj}{}
+\item{Adj}{Adjacency matrix.}
 
-\item{lambda}{}
+\item{lambda}{Regularization parameter.}
 
-\item{gamma}{}
+\item{gamma}{Tuning parameter controlling the degree of jittering.}
 }
 \value{
 A \code{list} object comprising:
-\item{alpha} Vector of network cohesion.
-\item{beta} Regression coefficients.
+\item{alpha}{Vector of network cohesion.} 
+\item{beta}{Regression coefficients.}
 }
 \description{
-Title
+Fitting Linear Regression Models for Network-linked Data
 }
 \examples{
-
+V <- 100
+K <- 3
+data <- generate.data(V, K)
+lm.net(data$X, data$Y, data$Adj)
 }

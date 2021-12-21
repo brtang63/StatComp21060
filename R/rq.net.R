@@ -1,23 +1,30 @@
-#' Title
+#' @useDynLib StatComp21060
+#' @importFrom Rcpp sourceCpp
+NULL
+#> NULL
+
+#' @title Fitting Quantile Regression Models for Network-linked Data
 #'
-#' @param X 
-#' @param Y 
-#' @param Adj 
-#' @param lambda 
-#' @param tau 
-#' 
+#' @param X Design matrix of predictors.
+#' @param Y Response vector.
+#' @param Adj Adjacency matrix.
+#' @param lambda Regularization parameter.
+#' @param tau The quantile to be estimated.
+#'
 #' @import CVXR
 #'
 #' @return A \code{list} object comprising:
-#' \item{alpha} Vector of network cohesion.
-#' \item{beta} Regression coefficients.
+#' \item{alpha}{Vector of network cohesion.} 
+#' \item{beta}{Regression coefficients.} 
 #'
 #' @export
 #'
 #' @examples
-#' 
-#' 
-rq.net <- function(X, Y, Adj, lambda, tau = 0.5) {
+#' V <- 100
+#' K <- 3
+#' data <- generate.data(V, K)
+#' lm.net(data$X, data$Y, data$Adj)
+rq.net <- function(X, Y, Adj, lambda = 0.1, tau = 0.5) {
   n <- nrow(X)
   p <- ncol(X)
   Y <- matrix(Y, ncol = 1)

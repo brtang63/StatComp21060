@@ -2,30 +2,32 @@
 % Please edit documentation in R/rq.net.R
 \name{rq.net}
 \alias{rq.net}
-\title{Title}
+\title{Fitting Quantile Regression Models for Network-linked Data}
 \usage{
-rq.net(X, Y, Adj, lambda, tau = 0.5)
+rq.net(X, Y, Adj, lambda = 0.1, tau = 0.5)
 }
 \arguments{
-\item{X}{}
+\item{X}{Design matrix of predictors.}
 
-\item{Y}{}
+\item{Y}{Response vector.}
 
-\item{Adj}{}
+\item{Adj}{Adjacency matrix.}
 
-\item{lambda}{}
+\item{lambda}{Regularization parameter.}
 
-\item{tau}{}
+\item{tau}{The quantile to be estimated.}
 }
 \value{
 A \code{list} object comprising:
-\item{alpha} Vector of network cohesion.
-\item{beta} Regression coefficients.
+\item{alpha}{Vector of network cohesion.} 
+\item{beta}{Regression coefficients.}
 }
 \description{
-Title
+Fitting Quantile Regression Models for Network-linked Data
 }
 \examples{
-
-
+V <- 100
+K <- 3
+data <- generate.data(V, K)
+lm.net(data$X, data$Y, data$Adj)
 }
