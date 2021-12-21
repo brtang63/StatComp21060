@@ -4,12 +4,12 @@
 #' @title bivariate MC chain
 #' @description  bivariate MC chain
 #' @param N sample size
-#' @param n initial value
-#' @param a sample size
-#' @param b sample size
-#' @return mat A matrix
+#' @param n Parameter in the bivariate density.
+#' @param a Parameter in the bivariate density.
+#' @param b Parameter in the bivariate density.
+#' @return mat A matrix of random samples.
 #' @export
-bi_chain_cpp <- function(N, n = 100L, a = 50L, b = 50L) {
-    .Call('_StatComp21060_bi_chain_cpp', PACKAGE = 'StatComp21060', N, n, a, b)
+GibbsC <- function(N, n = 100L, a = 50L, b = 50L) {
+    .Call('_StatComp21060_GibbsC', PACKAGE = 'StatComp21060', N, n, a, b)
 }
 

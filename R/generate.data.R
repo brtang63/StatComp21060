@@ -39,9 +39,6 @@ generate.data <- function(V, K, inter.p = 0.8, between.p = 0.2) {
   return(list(X = X, Y = Y, Adj = Adj))
 }
 
-
-
-
 BlockGen <- function(V, K, inter.p = 0.8, between.p = 0.2) {
   nodes <- rep(1:V)
   membership <- sample(K, size = V, replace = TRUE)
