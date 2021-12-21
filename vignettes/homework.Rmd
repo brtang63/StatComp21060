@@ -4,7 +4,7 @@ author: "Borui Tang 21060"
 date: "2021/12/20"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to the author's homework}
+  %\VignetteIndexEntry{StatCompHomwork_21060}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -1343,36 +1343,36 @@ $$
 It can be shown (see e.g. [23]) that for fixed $a, b, n$, the conditional distributions are $\operatorname{Binomial}(n, y)$ and $\operatorname{Beta}(x+a, n-x+b)$. Use the Gibbs sampler to generate a chain with target joint density $f(x, y)$.
 
 ```{r}
-library(Rcpp)
-cppFunction('Rcpp::NumericMatrix bi_chain_cpp(int N, int n = 100, int a = 50, int b = 50) {
-  Rcpp::NumericMatrix mat( N, 2);
-  Rcpp::NumericVector xt (2);
-  
-  for (int i = 1; i < N; i++) {
-    xt[0] = mat( i-1, 0 );
-    xt[1] = mat( i-1, 1 );
-    xt[0] = rbinom(1, n, xt[1])[0];
-    xt[1] = rbeta(1, xt[0] + a, n - xt[0] + b)[0];
-    mat( i, 0 ) = xt[0];
-    mat( i, 1 ) = xt[1];
-  }
-  
-  return mat;
-}')
+# library(Rcpp)
+# cppFunction('Rcpp::NumericMatrix bi_chain_cpp(int N, int n = 100, int a = 50, int b = 50) {
+#   Rcpp::NumericMatrix mat( N, 2);
+#   Rcpp::NumericVector xt (2);
+#   
+#   for (int i = 1; i < N; i++) {
+#     xt[0] = mat( i-1, 0 );
+#     xt[1] = mat( i-1, 1 );
+#     xt[0] = rbinom(1, n, xt[1])[0];
+#     xt[1] = rbeta(1, xt[0] + a, n - xt[0] + b)[0];
+#     mat( i, 0 ) = xt[0];
+#     mat( i, 1 ) = xt[1];
+#   }
+#   
+#   return mat;
+# }')
 ```
 
 ```{r}
-# Pure R function for generating observations
-bi_chain <- function(N, p = 2, n = 100, a = 50, b = 50) {
-  x <- matrix(0, nrow = N, ncol = p)
-  for (i in 2:N) {
-    xt <- x[i-1,]
-    xt[1] <- rbinom(1, n, xt[2])
-    xt[2] <- rbeta(1, xt[1] + a, n - xt[1] + b)
-    x[i,] <- xt
-  }
-  return(x)
-}
+# # Pure R function for generating observations
+# bi_chain <- function(N, p = 2, n = 100, a = 50, b = 50) {
+#   x <- matrix(0, nrow = N, ncol = p)
+#   for (i in 2:N) {
+#     xt <- x[i-1,]
+#     xt[1] <- rbinom(1, n, xt[2])
+#     xt[2] <- rbeta(1, xt[1] + a, n - xt[1] + b)
+#     x[i,] <- xt
+#   }
+#   return(x)
+# }
 ```
 
 
@@ -1381,13 +1381,13 @@ Compare the corresponding generated random numbers with
 pure R language using the function “qqplot”.
 
 ```{r}
-# generate data
-set.seed(1)
-N <- 10000
-x_r <- bi_chain(N)
-x_rcpp <- bi_chain_cpp(N)
-qqplot(x_r, x_rcpp)
-abline(coef = c(0,1), col = "red")
+# # generate data
+# set.seed(1)
+# N <- 10000
+# x_r <- bi_chain(N)
+# x_rcpp <- bi_chain_cpp(N)
+# qqplot(x_r, x_rcpp)
+# abline(coef = c(0,1), col = "red")
 ```
 
 The results of the two methods are quite similar according to the qqplot, where the red line is the straight line $y=x$.
@@ -1397,17 +1397,17 @@ Campare the computation time of the two functions with the
 function “microbenchmark”.
 
 ```{r}
-library(ggplot2)
-library(microbenchmark)
-res <- microbenchmark(
-  res_r = bi_chain(1000),
-  res_rcpp = bi_chain_cpp(1000),
-  times = 100
-) 
-
-# present rumtime in plots and table 
-autoplot(res)
-print(res)
+# library(ggplot2)
+# library(microbenchmark)
+# res <- microbenchmark(
+#   res_r = bi_chain(1000),
+#   res_rcpp = bi_chain_cpp(1000),
+#   times = 100
+# ) 
+# 
+# # present rumtime in plots and table 
+# autoplot(res)
+# print(res)
 ```
 The plot and table above illustrate the superiority of Rcpp on computational efficiency. 
 

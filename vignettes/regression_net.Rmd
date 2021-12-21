@@ -1,0 +1,22 @@
+---
+title: "Regression models for network-linked data"
+author: "Borui Tang 21060"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to the usage of the Bayesian classifier using binary generalized gaussian process regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+---
+
+```{r}
+library(StatComp21060)
+data <- generate.data(100, 3)
+X <- data$X
+Y <- data$Y
+Adj <- data$Adj
+
+lm.net(X, Y, Adj, 0.1, gamma = 0.01)
+rq.net(X, Y, Adj, 0.1)
+```
+
