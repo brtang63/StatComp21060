@@ -42,7 +42,7 @@ Adj <- data$Adj
 
 Before fitting regression models, we visualize the network structure to provide more intuition.
 
-```{r, warning=FALSE, fig.width=10}
+```{r, warning=FALSE, message=FALSE, fig.width=10, fig.height=10}
 library(igraph)
 g <- graph_from_adjacency_matrix(Adj)
 e <- as_edgelist(g)
