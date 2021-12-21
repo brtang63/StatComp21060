@@ -34,7 +34,7 @@ Now we provide a basic example on usage of this package. Note that we provide in
 
 ```{r}
 library(StatComp21060)
-data <- generate.data(100, 3, 2, 0.5, 0.02)
+data <- generate.data(100, 3, 4, 0.5, 0.02)
 X <- data$X
 Y <- data$Y
 Adj <- data$Adj
@@ -64,13 +64,11 @@ beta_rq <- as.vector(coef_rq$beta)
 
 The fitted network cohesion is as follows.
 ```{r}
-knitr::kable(cbind(cohesion_lm, cohesion_rq))
-knitr::kable(cbind(cohesion_lm, cohesion_rq))
+knitr::kable(head(cbind(cohesion_lm, cohesion_rq)))
 ```
 
 The fitted regression coefficients are as follows.
 ```{r}
-knitr::kable(cbind(beta_lm, beta_rq))
 knitr::kable(cbind(beta_lm, beta_rq))
 ```
 
