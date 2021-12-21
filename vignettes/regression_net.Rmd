@@ -1,22 +1,79 @@
 ---
-title: "Regression models for network-linked data"
+title: "Fitting regression models for network-linked data"
 author: "Borui Tang 21060"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Regression models for network-linked data}
+  %\VignetteIndexEntry{Fitting regression models for network-linked data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 ---
 
+## Introduction to regression models for network-linked data
+
+This package carries out regression model fitting for network-linked data. We briefly reviews these models at first.
+
+In our models, network structure among observations is always assumed existing and being observed. Specifically, each sample is a node of a undirected unweighted graph and the graph is given. We aim to make use of the network structure to construct better regression models, which encourage similarity between linked nodes. In this package, linear regression and quantile regression are considered.
+
+Formally, Denote by $L$ the Laplacian matrix of the graph. We solve the following optimizing problems, corresponding to linear regrssion and quantile regression, respectively.
+
+$$
+\min_{\alpha, \beta} L(\boldsymbol{\alpha}, \boldsymbol{\beta})=\|\boldsymbol{Y}-X \boldsymbol{\beta}-\boldsymbol{\alpha}\|^{2}+\lambda \boldsymbol{\alpha}^{T} L \boldsymbol{\alpha}.
+$$
+
+
+$$
+\min_{\alpha(\tau), \beta(\tau)} (\alpha(\tau), \beta(\tau))=\sum_{i=1}^{n} \rho_{\tau}\left(y_{i}-\alpha_{i}(\tau)-x_{i}^{T} \beta(\tau)\right)+\alpha(\tau)^{T} L \alpha(\tau).
+$$
+
+Here $\alpha$ or $\alpha(\tau)$ are vectors of network cohesion, which is the key concept in our model. We regularize on differences between network cohesion to encourage similarity of 
+
+## Quick Start
+
+Now we provide a basic example on usage of this package. Note that we provide in this package a \code{generate.data} function to generate simulated dataset with network structure from the Stochastic block model. We generate a dataset with 100 nodes and 3 communities.
+
 ```{r}
 library(StatComp21060)
-data <- generate.data(100, 3)
+data <- generate.data(100, 3, 2, 0.5, 0.02)
 X <- data$X
 Y <- data$Y
 Adj <- data$Adj
-
-lm.net(X, Y, Adj, 0.1, gamma = 0.01)
-rq.net(X, Y, Adj, 0.1)
 ```
+
+Before fitting regression models, we visualize the network structure to provide more intuition.
+
+```{r}
+library(igraph)
+g <- graph_from_adjacency_matrix(Adj)
+e <- as_edgelist(g)
+
+## Visualization
+plot(g, vertex.size = 6)
+```
+
+Now we fit our regression models on this data.  
+```{r}
+coef_lm <- lm.net(X, Y, Adj, 0.1, gamma = 0.01)
+coef_rq <- rq.net(X, Y, Adj, 0.1)
+
+cohesion_lm <- coef_lm$alpha
+beta_lm <- coef_lm$beta
+cohesion_rq <- as.vector(coef_rq$alpha)
+beta_rq <- as.vector(coef_rq$beta)
+```
+
+The fitted network cohesion is as follows.
+```{r}
+knitr::kable(cbind(cohesion_lm, cohesion_rq))
+knitr::kable(cbind(cohesion_lm, cohesion_rq))
+```
+
+The fitted regression coefficients are as follows.
+```{r}
+knitr::kable(cbind(beta_lm, beta_rq))
+knitr::kable(cbind(beta_lm, beta_rq))
+```
+
+
+
 

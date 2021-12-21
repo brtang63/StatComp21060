@@ -4,12 +4,14 @@
 \alias{generate.data}
 \title{Generate simulated dataset for regression with network-linked data}
 \usage{
-generate.data(V, K, inter.p = 0.8, between.p = 0.2)
+generate.data(V, K, p = 2, inter.p = 0.8, between.p = 0.2)
 }
 \arguments{
 \item{V}{number of vertices}
 
 \item{K}{number of communities}
+
+\item{p}{dimension of covariates}
 
 \item{inter.p}{in-community link probability}
 

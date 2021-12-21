@@ -1,16 +1,19 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-//' @title bivariate MC chain
-//' @description  bivariate MC chain
+//' @title A Gibbs Sampler
+//' @description Generate a chain with Gibbs sampler.
 //' @param N sample size
-//' @param n Parameter in the bivariate density.
-//' @param a Parameter in the bivariate density.
-//' @param b Parameter in the bivariate density.
-//' @return mat A matrix of random samples.
+//' @return A matrix of random samples.
+//'
+//' 
 //' @export
 // [[Rcpp::export]]
-Rcpp::NumericMatrix GibbsC(int N, int n = 100, int a = 50, int b = 50) {
+Rcpp::NumericMatrix GibbsC(int N) {
+  int n = 100;
+  int a = 50;
+  int b = 50;
+  
   Rcpp::NumericMatrix mat( N, 2);
   Rcpp::NumericVector xt (2);
   

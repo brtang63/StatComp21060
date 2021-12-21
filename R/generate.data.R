@@ -1,6 +1,7 @@
 #' @title Generate simulated dataset for regression with network-linked data
 #'
 #' @param V number of vertices
+#' @param p dimension of covariates
 #' @param K number of communities
 #' @param inter.p in-community link probability
 #' @param between.p out-community link probability
@@ -22,9 +23,9 @@
 #' str(dataset)
 #' @export
 #'
-generate.data <- function(V, K, inter.p = 0.8, between.p = 0.2) {
-  p.x <- 1
-  beta <- 1
+generate.data <- function(V, K, p = 2, inter.p = 0.8, between.p = 0.2) {
+  p.x <- p
+  beta <- runif(p.x, 1, 3)
   block.g <- BlockGen(V, K, inter.p, between.p)
   true.alpha <- AlphaGen.from.Block(block.g$Block, s = 0.2, scale = 3)
   dd <- Regression.Gen.norm(true.alpha$alpha, p = p.x, beta = beta)

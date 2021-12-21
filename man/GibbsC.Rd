@@ -2,22 +2,16 @@
 % Please edit documentation in R/RcppExports.R
 \name{GibbsC}
 \alias{GibbsC}
-\title{bivariate MC chain}
+\title{A Gibbs Sampler}
 \usage{
-GibbsC(N, n = 100L, a = 50L, b = 50L)
+GibbsC(N)
 }
 \arguments{
 \item{N}{sample size}
-
-\item{n}{Parameter in the bivariate density.}
-
-\item{a}{Parameter in the bivariate density.}
-
-\item{b}{Parameter in the bivariate density.}
 }
 \value{
-mat A matrix of random samples.
+A matrix of random samples.
 }
 \description{
-bivariate MC chain
+Generate a chain with Gibbs sampler.
 }

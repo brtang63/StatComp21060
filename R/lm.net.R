@@ -14,8 +14,9 @@
 #'
 #' @examples
 #' V <- 100
+#' p <- 3
 #' K <- 3
-#' data <- generate.data(V, K)
+#' data <- generate.data(V, K, p)
 #' lm.net(data$X, data$Y, data$Adj)
 lm.net <- function(X, Y, Adj, lambda = 0.1, gamma = 0.01) {
   n <- nrow(X)

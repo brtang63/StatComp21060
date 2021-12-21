@@ -28,6 +28,7 @@ Fitting Quantile Regression Models for Network-linked Data
 \examples{
 V <- 100
 K <- 3
-data <- generate.data(V, K)
-lm.net(data$X, data$Y, data$Adj)
+p <- 3
+data <- generate.data(V, K, p)
+rq.net(data$X, data$Y, data$Adj)
 }

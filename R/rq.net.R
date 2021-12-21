@@ -22,8 +22,9 @@ NULL
 #' @examples
 #' V <- 100
 #' K <- 3
-#' data <- generate.data(V, K)
-#' lm.net(data$X, data$Y, data$Adj)
+#' p <- 3
+#' data <- generate.data(V, K, p)
+#' rq.net(data$X, data$Y, data$Adj)
 rq.net <- function(X, Y, Adj, lambda = 0.1, tau = 0.5) {
   n <- nrow(X)
   p <- ncol(X)

@@ -27,7 +27,8 @@ Fitting Linear Regression Models for Network-linked Data
 }
 \examples{
 V <- 100
+p <- 3
 K <- 3
-data <- generate.data(V, K)
+data <- generate.data(V, K, p)
 lm.net(data$X, data$Y, data$Adj)
 }
